@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>标题</title>
+    <link rel="icon" th:href="@{/favicon.ico}" type="image/ico">
+    <link rel="stylesheet" th:href="@{/css/layui.css}">
+</head>
+<body class="layui-layout-body">
+<!-- 你的HTML代码 -->
+
+<div >
+    <ul class="layui-nav" >
+        <li class="layui-nav-item"><h4>图灵机演示</h4></li>
+        <li class="layui-nav-item layui-this"><a href="/">首页</a></li>
+        <li class="layui-nav-item"><a href="">显示</a></li>
+    </ul>
+</div>
+
+
+
+<!--主要内容 -->
+<div style="padding: 30px; background-color: #F2F2F2;">
+    <form action="/tuling" method="post">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-md6">
+            <div class="layui-card">
+                <div class="layui-card-header">选择规则</div>
+                <div class="layui-card-body">
+                   <select id="rules" name="rules" class="layui-select" style="width: 100%">
+                        <option value="0">请选择规则</option>
+                        <option value="1">规则一:加一操作，对给定二进制数实现加一</option>
+                        <option value="2">规则二:乘操作，对给定个数0实现相乘</option>
+                        <option value="3">规则三:复制操作，对给定01序列实现复制</option>
+                        <option value="4">自定义规则</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-md6">
+            <div class="layui-card">
+                <div class="layui-card-header">选择速度</div>
+                <div class="layui-card-body">
+                    <select id = "speed" name="speed" class="layui-select" style="width: 100%">
+                        <option value="100">特快</option>
+                        <option value="500">快</option>
+                        <option value="1000">中</option>
+                        <option value="1500">慢</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-md12" id="new" >
+            <div class="layui-card">
+                <div class="layui-card-header">输入新规则</div>
+                <div class="layui-card-body">
+                    <div>
+                        <input type="text"    autocomplete="off" placeholder="请输入规则-当前状态,当前符号,新状态,新写符号,读写头移动;" class="layui-input">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-md12">
+            <div class="layui-card">
+                <div class="layui-card-header">输入纸带内容</div>
+                <div class="layui-card-body">
+                    <div>
+                        <input type="text" id="data" name="data"  autocomplete="off" placeholder="请输入序列" class="layui-input">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="layui-col-md12">
+         <button type="submit" class="layui-btn">提交</button>
+        </div>
+    </div>
+    </form>
+</div>
+
+
+
+
+<!-- 你的js -->
+<script th:src="@{/layui.js}"></script>
+<script th:src="@{/user.js}"></script>
+<script th:src="@{/jquery.js}"></script>
+<script th:inline="javascript">
+
+    layui.use('jquery', function(){
+        var jquery = layui.jquery;
+
+        //…
+    });
+
+
+    var tips = [[${tip}]];
+    if (tips != null){
+        layui.use(['layer', 'form'], function(){
+            var layer = layui.layer
+                ,form = layui.form;
+
+            layer.msg(tips);
+        });
+    }
+
+    $(function() {
+        //隐藏div
+        $("#new").hide();
+        //给div添加change事件
+        $("#rules").change(function() {
+            if($(this).val() == 4 ) {
+                $("#new").show();
+            } else
+            {
+                $("#new").hide();
+            }
+        })
+    })
+
+
+
+</script>
+
+
+
+</body>
+</html>

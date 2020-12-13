@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>标题</title>
+    <link rel="icon" th:href="@{/favicon.ico}" type="image/ico">
+    <link rel="stylesheet" th:href="@{/css/layui.css}">
+</head>
+<body class="layui-layout-body">
+<!-- 你的HTML代码 -->
+
+<div >
+    <ul class="layui-nav" >
+        <li class="layui-nav-item"> <h4>图灵机演示</h4> </li>
+        <li class="layui-nav-item"><a href="/">首页</a></li>
+        <li class="layui-nav-item layui-this"><a href="">显示</a></li>
+
+    </ul>
+</div>
+
+
+<!--主要内容 -->
+<div style="padding: 30px; background-color: #F2F2F2;">
+    <form action="/tuling" method="post">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-md12">
+            <div class="layui-card">
+                <div class="layui-card-header">纸带内容</div>
+                <div class="layui-card-body">
+                    <table class="layui-table" id="str">
+                        <tr>
+                            <td th:each="str,num:${session.data}">[[${str}]]</td>
+                        </tr>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-md6">
+            <div class="layui-card">
+                <div class="layui-card-header">规则</div>
+                <div class="layui-card-body">
+                    <table class="layui-table" th:if="${session.rules ==1}">
+                        <colgroup>
+                            <col width="80">
+                            <col width="100">
+                            <col width="100">
+                            <col width="100">
+                            <col width="100">
+                            <col>
+                        </colgroup>
+                        <thead>
+                        <tr>
+                            <th>序号</th>
+                            <th>当前状态</th>
+                            <th>当前符号</th>
+                            <th>新状态</th>
+                            <th>新写符号</th>
+                            <th>读写头移动</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+
+                            <td>1</td>
+                            <td style="background: rgb(73,255,112);">Q0</td>
+                            <td>0</td>
+                            <td>Q1</td>
+                            <td>1</td>
+                            <td>RIGHT</td>
+
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td style="background: rgb(97,255,120);">Q0</td>
+                            <td>1</td>
+                            <td>Q2</td>
+                            <td>0</td>
+                            <td>RIGHT</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Q0</td>
+                            <td>B</td>
+                            <td>Q3</td>
+                            <td>B</td>
+                            <td>NONE</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>Q1</td>
+                            <td>0</td>
+                            <td>Q1</td>
+                            <td>0</td>
+                            <td>RIGHT</td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>Q1</td>
+                            <td>1</td>
+                            <td>Q1</td>
+                            <td>1</td>
+                            <td>RIGHT</td>
+                        </tr>
+                        <tr>
+                            <td>6</td>
+                            <td>Q1</td>
+                            <td>B</td>
+                            <td>Q3</td>
+                            <td>B</td>
+                            <td>NONE</td>
+                        </tr>
+                        <tr>
+                            <td>7</td>
+                            <td>Q2</td>
+                            <td>0</td>
+                            <td>Q1</td>
+                            <td>1</td>
+                            <td>RIGHT</td>
+                        </tr>
+                        <tr>
+                            <td>8</td>
+                            <td>Q2</td>
+                            <td>1</td>
+                            <td>Q2</td>
+                            <td>0</td>
+                            <td>RIGHT</td>
+                        </tr>
+                        <tr>
+                            <td>9</td>
+                            <td>Q2</td>
+                            <td>B</td>
+                            <td style="background: rgb(255,98,91);">Q3</td>
+                            <td>1</td>
+                            <td>NONE</td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                    <table class="layui-table" th:if="${session.rules ==2}">
+                        <colgroup>
+                            <col width="80">
+                            <col width="100">
+                            <col width="100">
+                            <col width="100">
+                            <col width="100">
+                            <col>
+                        </colgroup>
+                        <thead>
+                        <tr>
+                            <th>序号</th>
+                            <th>当前状态</th>
+                            <th>当前符号</th>
+                            <th>新状态</th>
+                            <th>新写符号</th>
+                            <th>读写头移动</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+
+                            <td>1</td>
+                            <td style="background: rgb(61,255,55);">Q0</td>
+                            <td>0</td>
+                            <td>Q1</td>
+                            <td>B</td>
+                            <td>RIGHT</td>
+
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td style="background: rgb(37,255,102);">Q0</td>
+                            <td>B</td>
+                            <td style="background: rgb(255,86,53);">Q8</td>
+                            <td>B</td>
+                            <td>RIGHT</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Q1</td>
+                            <td>0</td>
+                            <td>Q1</td>
+                            <td>0</td>
+                            <td>RIGHT</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>Q1</td>
+                            <td>B</td>
+                            <td>Q2</td>
+                            <td>B</td>
+                            <td>RIGHT</td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>Q2</td>
+                            <td>0</td>
+                            <td>Q3</td>
+                            <td>1</td>
+                            <td>RIGHT</td>
+                        </tr>
+                        <tr>
+                            <td>6</td>
+                            <td>Q3</td>
+                            <td>B</td>
+                            <td>Q3</td>
+                            <td>B</td>
+                            <td>RIGHT</td>
+                        </tr>
+                        <tr>
+                            <td>7</td>
+                            <td>Q3</td>
+                            <td>B</td>
+                            <td>Q4</td>
+                            <td>B</td>
+                            <td>RIGHT</td>
+                        </tr>
+                        <tr>
+                            <td>8</td>
+                            <td>Q4</td>
+                            <td>0</td>
+                            <td>Q4</td>
+                            <td>0</td>
+                            <td>RIGHT</td>
+                        </tr>
+                        <tr>
+                            <td>9</td>
+                            <td>Q4</td>
+                            <td>B</td>
+                            <td>Q5</td>
+                            <td>0</td>
+                            <td>LEFT</td>
+                        </tr>
+                        <tr>
+                            <td>10</td>
+                            <td>Q5</td>
+                            <td>0</td>
+                            <td>Q5</td>
+                            <td>0</td>
+                            <td>LEFT</td>
+                        </tr>
+                        <tr>
+                            <td>11</td>
+                            <td>Q5</td>
+                            <td>B</td>
+                            <td>Q5</td>
+                            <td>B</td>
+                            <td>LEFT</td>
+                        </tr>
+                        <tr>
+                            <td>12</td>
+                            <td>Q5</td>
+                            <td>1</td>
+                            <td>Q2</td>
+                            <td>0</td>
+                            <td>RIGHT</td>
+                        </tr>
+                        <tr>
+                            <td>13</td>
+                            <td>Q2</td>
+                            <td>B</td>
+                            <td>Q6</td>
+                            <td>B</td>
+                            <td>LEFT</td>
+                        </tr>
+                        <tr>
+                            <td>14</td>
+                            <td>Q6</td>
+                            <td>0</td>
+                            <td>Q6</td>
+                            <td>0</td>
+                            <td>LEFT</td>
+                        </tr>
+                        <tr>
+                            <td>15</td>
+                            <td>Q6</td>
+                            <td>B</td>
+                            <td>Q7</td>
+                            <td>B</td>
+                            <td>LEFT</td>
+                        </tr>
+                        <tr>
+                            <td>16</td>
+                            <td>Q7</td>
+                            <td>0</td>
+                            <td>Q7</td>
+                            <td>0</td>
+                            <td>LEFT</td>
+                        </tr>
+                        <tr>
+                            <td>17</td>
+                            <td>Q7</td>
+                            <td>B</td>
+                            <td style="background: rgb(71,255,65);">Q0</td>
+                            <td>B</td>
+                            <td>RIGHT</td>
+                        </tr>
+                        </tbody>
+                    </table >
+
+                    <table class="layui-table" th:if="${session.rules ==3}">
+                        <colgroup>
+                            <col width="80">
+                            <col width="100">
+                            <col width="100">
+                            <col width="100">
+                            <col width="100">
+                            <col>
+                        </colgroup>
+                        <thead>
+                        <tr>
+                            <th>序号</th>
+                            <th>当前状态</th>
+                            <th>当前符号</th>
+                            <th>新状态</th>
+                            <th>新写符号</th>
+                            <th>读写头移动</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+
+                            <td>1</td>
+                            <td style="background: rgb(106,255,141);">Q0</td>
+                            <td>0</td>
+                            <td>Q1</td>
+                            <td>0</td>
+                            <td>RIGHT</td>
+
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Q1</td>
+                            <td>0</td>
+                            <td>Q6</td>
+                            <td>0</td>
+                            <td>LEFT</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Q1</td>
+                            <td>1</td>
+                            <td>Q2</td>
+                            <td>0</td>
+                            <td>RIGHT</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>Q2</td>
+                            <td>0</td>
+                            <td>Q3</td>
+                            <td>0</td>
+                            <td>RIGHT</td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>Q2</td>
+                            <td>1</td>
+                            <td>Q2</td>
+                            <td>1</td>
+                            <td>RIGHT</td>
+                        </tr>
+                        <tr>
+                            <td>6</td>
+                            <td>Q3</td>
+                            <td>0</td>
+                            <td>Q4</td>
+                            <td>1</td>
+                            <td>LEFT</td>
+                        </tr>
+                        <tr>
+                            <td>7</td>
+                            <td>Q3</td>
+                            <td>1</td>
+                            <td>Q3</td>
+                            <td>1</td>
+                            <td>RIGHT</td>
+                        </tr>
+                        <tr>
+                            <td>8</td>
+                            <td>Q4</td>
+                            <td>0</td>
+                            <td>Q5</td>
+                            <td>0</td>
+                            <td>LEFT</td>
+                        </tr>
+                        <tr>
+                            <td>9</td>
+                            <td>Q4</td>
+                            <td>1</td>
+                            <td>Q4</td>
+                            <td>1</td>
+                            <td>LEFT</td>
+                        </tr>
+                        <tr>
+                            <td>10</td>
+                            <td>Q5</td>
+                            <td>0</td>
+                            <td>Q1</td>
+                            <td>1</td>
+                            <td>RIGHT</td>
+                        </tr>
+                        <tr>
+                            <td>11</td>
+                            <td>Q5</td>
+                            <td>1</td>
+                            <td>Q5</td>
+                            <td>1</td>
+                            <td>LEFT</td>
+                        </tr>
+                        <tr>
+                            <td>12</td>
+                            <td>Q6</td>
+                            <td>0</td>
+                            <td>Q7</td>
+                            <td>0</td>
+                            <td>RIGHT</td>
+                        </tr>
+                        <tr>
+                            <td>13</td>
+                            <td>Q6</td>
+                            <td>1</td>
+                            <td>Q6</td>
+                            <td>1</td>
+                            <td>LEFT</td>
+                        </tr>
+                        <tr>
+                            <td>14</td>
+                            <td>Q7</td>
+                            <td>0</td>
+                            <td style="background: rgb(255,52,47);">Q8</td>
+                            <td>0</td>
+                            <td>NONE</td>
+                        </tr>
+                        <tr>
+                            <td>15</td>
+                            <td>Q7</td>
+                            <td>1</td>
+                            <td style="background: rgb(255,77,47);">Q8</td>
+                            <td>1</td>
+                            <td>NONE</td>
+                        </tr>
+                        </tbody>
+                    </table >
+
+                    <table class="layui-table" th:if="${session.rules ==4}">
+                        <colgroup>
+                            <col width="80">
+                            <col width="100">
+                            <col width="100">
+                            <col width="100">
+                            <col width="100">
+                            <col>
+                        </colgroup>
+                        <thead>
+                        <tr>
+                            <th>序号</th>
+                            <th>当前状态</th>
+                            <th>当前符号</th>
+                            <th>新状态</th>
+                            <th>新写符号</th>
+                            <th>读写头移动</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+
+                            <td>1</td>
+                            <td style="background: rgb(86,255,118);">Q0</td>
+                            <td>1</td>
+                            <td>Q0</td>
+                            <td>1</td>
+                            <td>RIGHT</td>
+
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td style="background: rgb(50,255,82);">Q0</td>
+                            <td>0</td>
+                            <td>Q1</td>
+                            <td>1</td>
+                            <td>RIGHT</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Q1</td>
+                            <td>1</td>
+                            <td>Q1</td>
+                            <td>1</td>
+                            <td>RIGHT</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>Q1</td>
+                            <td>B</td>
+                            <td>Q2</td>
+                            <td>B</td>
+                            <td>LEFT</td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>Q2</td>
+                            <td>1</td>
+                            <td>Q2</td>
+                            <td>B</td>
+                            <td>NONE</td>
+                        </tr>
+                        <tr>
+                            <td>6</td>
+                            <td>Q2</td>
+                            <td>B</td>
+                            <td style="background: rgb(255,93,84);">Q3</td>
+                            <td>B</td>
+                            <td>NONE</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-md6">
+            <div class="layui-card">
+                <div class="layui-card-header">选择方式</div>
+                <div class="layui-card-body">
+                    <button type="button"  onclick="addone(0)" class="layui-btn">自动</button>
+                    <button type="button" onclick="noaddone(0)" class="layui-btn">手动</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-col-md6" th:if="${!(session.current == -1)}">
+            <div class="layui-card">
+                <div class="layui-card-header">当前规则</div>
+                <div class="layui-card-body">
+                    <table class="layui-table" th:if="${rul != null}" >
+                        <colgroup>
+
+                            <col width="100">
+                            <col width="100">
+                            <col width="100">
+                            <col width="100">
+                            <col>
+                        </colgroup>
+                        <thead>
+                        <tr>
+                            <th>当前状态</th>
+                            <th>当前符号</th>
+                            <th>新状态</th>
+                            <th>新写符号</th>
+                            <th>读写头移动</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr >
+                            <td>Q[[${rul[0]}]]</td>
+                            <td>[[${rul[1]}]]</td>
+                            <td>Q[[${rul[2]}]]</td>
+                            <td>[[${rul[3]}]]</td>
+                            <td th:if="${rul[4].equals('L')}">LEFT</td>
+                            <td th:if="${rul[4].equals('R')}">RIGHT</td>
+                            <td th:if="${rul[4].equals('N')}">NONE</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <span th:if="${rul == null}" >STOP!</span>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    </form>
+</div>
+
+
+<!-- 你的js -->
+<script th:src="@{/layui.js}"></script>
+<script th:src="@{/user.js}"></script>
+
+<script th:inline="javascript">
+
+
+
+    var Str = [[${session.Str}]];
+    var active = [[${session.current}]];
+    var total = [[${session.total}]];
+    var table=document.getElementById('str');
+    var pos = [[${pos}]];
+
+    var speed = [[${session.speed}]];
+
+
+
+    if ((active != -1) && (active < total)){
+
+
+
+        setTimeout(function () {
+            var temp = document.createElement("form");
+            temp.action = "/addone";
+            temp.method = "post";
+            temp.style.display = "none";
+            var opt = document.createElement("input");
+            opt.name = "current";
+            opt.value = active;
+            temp.appendChild(opt);
+            document.body.appendChild(temp);
+            temp.submit();
+            return temp;
+
+        },speed);
+        table.rows[0].cells[pos].style.background='rgb(255,254,70)';
+
+    }
+
+
+
+
+
+
+
+</script>
+
+
+
+</body>
+</html>
